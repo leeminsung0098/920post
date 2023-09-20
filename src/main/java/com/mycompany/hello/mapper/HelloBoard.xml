@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.hello.mapper.MemberMapper">
+
+
+<select id="selectBoardAll" resultType="com.mycompany.hello.domain.BoardVO">
+<!-- 	ROWNUM AS RN, -->
+	SELECT 
+	       BNO, 
+	       TITLE, 
+	       CONTENT, 
+	       WRITER,
+	       REGDATE,
+	       DELETE_BOARD
+	  FROM BOARD
+	  WHERE DELETE_BOARD = 'N' 
+
+</select>
+
+<select id="selectListPage" resultType="com.mycompany.hello.domain.BoardVO">
+		SELECT *
+	      FROM (SELECT ROWNUM AS RNA,
+	                   BNO, 
+                       TITLE, 
+                       CONTENT, 
+                       WRITER,
+                       REGDATE,
+                       DELETE_BOARD
+	             FROM BOARD
+	            WHERE DELETE_BOARD = 'N'
+	             )BOARD2
+	     WHERE DELETE_BOARD = 'N' 
+	       AND BOARD2.RNA BETWEEN #{startindex} AND #{endindex}
+</select>
+
+<select id="trashboardlist" resultType="com.mycompany.hello.domain.BoardVO">
+	SELECT BNO, 
+	       TITLE, 
+	       CONTENT, 
+	       WRITER,
+	       REGDATE,
+	       DELETE_BOARD
+	  FROM BOARD
+	  WHERE DELETE_BOARD = 'Y' 
+</select>
+
+<select id="boardDetail" resultType="com.mycompany.hello.domain.BoardVO">
+	SELECT BNO,
+	       TITLE, 
+	       CONTENT, 
+	       WRITER,
+	       REGDATE,
+	       DELETE_BOARD
+	  FROM BOARD
+	  WHERE
+	  BNO = #{BNO}
+</select>
+
+<select id="boardUpdate" resultType="com.mycompany.hello.domain.BoardVO">
+		UPDATE BOARD
+		SET
+			TITLE = #{TITLE}
+			,CONTENT = #{CONTENT}
+			,REGDATE = systimestamp
+		WHERE BNO = #{BNO}
+</select>
+
+
+<select id="boardDelete" resultType="com.mycompany.hello.domain.BoardVO">
+UPDATE BOARD 
+   SET DELETE_BOARD = 'Y' 
+ WHERE BNO = #{BNO}
+</select>
+
+<select  id="selectboardIner" resultType="com.mycompany.hello.domain.BoardVO">
+INSERT INTO BOARD(
+		BNO,
+		TITLE,
+		CONTENT,
+		WRITER,
+		VIEWCNT,
+		REGDATE,
+		DELETE_BOARD) 
+		VALUES (
+		(SELECT MAX(BNO+1) FROM BOARD) ,
+		#{TITLE} ,
+		#{CONTENT} ,
+		#{ID} ,
+		0 ,
+		systimestamp,
+		'N'
+		)
+		</select>
+
+</mapper>

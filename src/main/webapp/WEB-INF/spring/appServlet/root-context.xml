@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+<!-- 오라클 연동 설정  -->
+<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 	<property name="driverClassName" value ="oracle.jdbc.driver.OracleDriver"/> -->
+<!-- 	<property name="url" value ="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"/> -->
+<!-- 	<property name="username" value ="system"/> -->
+<!-- 	<property name="password" value ="doncoms"/> -->
+<!-- </bean> -->
+<!-- 마이바티스 -->
+<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> -->
+<!-- 	<property name="dataSource" ref="dataSource"></property> -->
+<!-- 	<property name="configLocation" value="classpath:/mybatis-config.xml"></property> -->
+<!-- 	<property name="Locations" value="classpath*:/config/Member.xml"></property> -->
+<!-- </bean> -->
+<!-- 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache"> -->
+<!-- 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg> -->
+<!-- 	</bean> -->
+	
+<!--  맵퍼 설정 v2 -->
+<!-- <bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"> -->
+<!-- <property name="dataSource" ref="dataSource"/> -->
+<!-- <property name="configLocation" value="classpath:config/*Config.xml"/> -->
+<!-- <property name="mapperLocations" value="classpath*:config/*Member.xml"/> -->
+<!-- </bean> -->
+<!-- <bean id="ss" class="org.mybatis.spring.SqlSessionTemplate"> -->
+<!-- <constructor-arg ref="factoryBean"/> -->
+<!-- </bean> -->
+
+
+<!-- SqlSessionFactory-->
+<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> -->
+<!--    <property name="dataSource" ref="dataSource" /> -->
+<!--    <property name="configLocation" value="classpath:/mybatis-config.xml"></property> -->
+<!--    <property name="mapperLocations" value="classpath:/com.mycompany.hello.mapper/MemberMapper"></property> -->
+<!-- </bean> -->
+
+<!-- 타일즈 -->
+<!-- 	<bean id="tilesConfigurer" -->
+<!-- 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> -->
+<!-- 		<property name="completeAutoload" value="true" /> -->
+<!-- 		<property name="definitions"> -->
+<!-- 			<list> -->
+<!-- 				<value>/WEB-INF/tiles/tiles.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="tilesViewResolver" -->
+<!-- 		class="org.springframework.web.servlet.view.UrlBasedViewResolver"> -->
+<!-- 		<property name="viewClass" -->
+<!-- 			value="org.springframework.web.servlet.view.tiles3.TilesView" /> -->
+<!-- 		<property name="order" value="1" /> -->
+<!-- 	</bean> -->
+
+
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+<!-- 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<property name="prefix" value="/WEB-INF/views/" /> -->
+<!-- 		<property name="suffix" value=".jsp" /> -->
+<!-- 	</bean> -->
+
+<!-- 어노테이션 사용 -->
+<context:component-scan base-package="com.mycompany.hello.*" use-default-filters="false">
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+</context:component-scan>
+
+<context:annotation-config/>
+<context:component-scan base-package="com"/>
+
+
+<!-- <mybatis-spring:scan base-package="com.mycompany.hello.mapper"/> -->
+<!-- <context:component-scan base-package="com.mycompany.hello.mapper"/> -->
+
+
+
+
+<!-- meta-inf 에 연결  -->
+<!-- <bean id = "dataSource1" class= "org.springframework.jndi.JndiObjectFactoryBeab"> -->
+<!-- <property name="jndiName" value="java:comp/env/jdbc/myora"/> -->
+<!-- </bean> -->
+</beans>
+
+
+

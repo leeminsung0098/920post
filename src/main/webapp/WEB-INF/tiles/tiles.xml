@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+<!-- 기본 레이아웃 설정 -->
+	<definition name="tiles-default" template="/WEB-INF/tiles/default.jsp">
+		
+	</definition>
+	<!-- 팝업 레이아웃 설정 (빈 레이아웃) -->
+	<definition name="tiles-default" template="/WEB-INF/tiles/popup.jsp">
+		<put-attribute name="body" />
+	</definition>
+
+	<!-- popup으로 끝나는 값 반환시 *popup.jsp 화면 반환 -->
+	<!-- 해당 결과로 /WEB-INF/tiles/popup.jsp 화면이 반환되며, 해당 화면에는 body만 존재 -->
+	<definition name="*popup" extends="tilesNoStyle">
+		<put-attribute name="body" value="/WEB-INF/jsp/main/{1}popup.jsp" />
+	</definition>
+
+	<!-- 모든 요청에 대해 매핑 화면 반환 -->
+	<!-- 해당 결과로 /WEB-INF/tiles/default.jsp 화면이 반환되며, 해당 화면에는 header, body, footer가 존재 -->
+	<definition name="*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/jsp/main/{1}.jsp" />
+	</definition>
+	<definition name="*/*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/jsp/main/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/jsp/main/{1}/{2}/{3}.jsp" />
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,10 @@
+@charset "EUC-KR";
+.my-div {
+
+	  cursor : pointer;
+
+	}
+.noe {
+	display : inline-block;
+	padding-right:30px;
+}
